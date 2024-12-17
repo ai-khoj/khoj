@@ -1,0 +1,159 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "khoj"
+description = "Your Second Brain"
+readme = "README.md"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.10"
+authors = [
+    { name = "Debanjum Singh Solanky, Saba Imran" },
+]
+keywords = [
+    "search",
+    "semantic-search",
+    "productivity",
+    "NLP",
+    "AI",
+    "org-mode",
+    "markdown",
+    "images",
+    "pdf",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Human Machine Interfaces",
+    "Intended Audience :: Information Technology",
+]
+dependencies = [
+    "beautifulsoup4 ~= 4.12.3",
+    "dateparser >= 1.1.1",
+    "defusedxml == 0.7.1",
+    "fastapi >= 0.110.0",
+    "python-multipart >= 0.0.7",
+    "jinja2 == 3.1.4",
+    "openai >= 1.0.0",
+    "tiktoken >= 0.3.2",
+    "tenacity >= 8.2.2",
+    "magika ~= 0.5.1",
+    "pillow ~= 10.0.0",
+    "pydantic[email] >= 2.0.0",
+    "pyyaml ~= 6.0",
+    "rich >= 13.3.1",
+    "schedule == 1.1.0",
+    "sentence-transformers == 3.0.1",
+    "einops == 0.8.0",
+    "transformers >= 4.28.0",
+    "torch == 2.2.2",
+    "uvicorn == 0.30.6",
+    "aiohttp ~= 3.9.0",
+    "langchain == 0.2.5",
+    "langchain-community == 0.2.5",
+    "requests >= 2.26.0",
+    "tenacity == 8.3.0",
+    "anyio == 3.7.1",
+    "pymupdf == 1.24.11",
+    "django == 5.0.10",
+    "django-unfold == 0.42.0",
+    "authlib == 1.2.1",
+    "llama-cpp-python == 0.2.88",
+    "itsdangerous == 2.1.2",
+    "httpx == 0.25.0",
+    "pgvector == 0.2.4",
+    "psycopg2-binary == 2.9.9",
+    "lxml == 4.9.3",
+    "tzdata == 2023.3",
+    "rapidocr-onnxruntime == 1.3.24",
+    "openai-whisper >= 20231117",
+    "django-phonenumber-field == 7.3.0",
+    "phonenumbers == 8.13.27",
+    "markdownify ~= 0.11.6",
+    "markdown-it-py ~= 3.0.0",
+    "websockets == 12.0",
+    "psutil >= 5.8.0",
+    "huggingface-hub >= 0.22.2",
+    "apscheduler ~= 3.10.0",
+    "pytz ~= 2024.1",
+    "cron-descriptor == 1.4.3",
+    "django_apscheduler == 0.6.2",
+    "anthropic == 0.26.1",
+    "docx2txt == 0.8",
+    "google-generativeai == 0.8.3",
+    "pyjson5 == 1.6.7",
+    "resend == 1.0.1",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://khoj.dev"
+Documentation = "https://docs.khoj.dev"
+Code = "https://github.com/khoj-ai/khoj"
+
+[project.scripts]
+khoj = "khoj.main:run"
+
+[project.optional-dependencies]
+prod = [
+    "gunicorn == 22.0.0",
+    "google-auth == 2.23.3",
+    "stripe == 7.3.0",
+    "twilio == 8.11",
+    "boto3 >= 1.34.57",
+]
+dev = [
+    "khoj[prod]",
+    "pytest >= 7.1.2",
+    "pytest-xdist[psutil]",
+    "pytest-django == 4.5.2",
+    "pytest-asyncio == 0.21.1",
+    "freezegun >= 1.2.0",
+    "factory-boy >= 3.2.1",
+    "mypy >= 1.0.1",
+    "black >= 23.1.0",
+    "pre-commit >= 3.0.4",
+    "gitpython ~= 3.1.43",
+    "datasets",
+    "pandas",
+]
+
+[tool.hatch.version]
+source = "vcs"
+raw-options.local_scheme = "no-local-version"  # PEP440 compliant version for PyPi
+
+[tool.hatch.build.targets.sdist]
+include = ["src/khoj"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/khoj"]
+
+[tool.mypy]
+files = "src/khoj"
+pretty = true
+strict_optional = false
+install_types = true
+ignore_missing_imports = true
+non_interactive = true
+show_error_codes = true
+warn_unused_ignores = false
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers"
+markers = [
+    "chatquality: Evaluate chatbot capabilities and quality",
+]

@@ -1,0 +1,17 @@
+content-type:
+  org:
+    compressed-jsonl: .notes.json.gz
+    embeddings-file: .note_embeddings.pt
+    index-header-entries: true
+    input-files:
+    - ~/first_from_config.org
+    - ~/second_from_config.org
+    input-filter:
+    - '*.org'
+    - ~/notes/*.org
+enable-offline-chat: false
+search-type:
+  asymmetric:
+    cross-encoder: cross-encoder/ms-marco-MiniLM-L-6-v2
+    encoder: sentence-transformers/msmarco-MiniLM-L-6-v3
+version: 0.15.0
